@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   Button,
+  ActivityIndicator,
 } from "react-native";
 import { useState } from "react";
 
@@ -18,6 +19,12 @@ const Page = () => {
 
   return (
     <View style={styles.container}>
+      {loading && (
+        <View style={styles.overlay}>
+          <ActivityIndicator size="large" color="#fff" />
+          <Text style={{ color: "#fff" }}>Loading...</Text>
+        </View>
+      )}
       <Text style={styles.header}>Galaxies.dev</Text>
       <TextInput
         style={styles.inputField}
@@ -73,6 +80,15 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 4,
   },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 1,
+    elevation: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    gap: 10,
+  }
 });
 
 export default Page;
