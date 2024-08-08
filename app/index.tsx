@@ -1,11 +1,60 @@
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet, TextInput } from "react-native";
+import { useState } from "react";
 
 const Page = () => {
-  return (
-    <View>
-      <Text>Page</Text>
-    </View>
-  )
-}
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-export default Page
+  const onSignInPress = async () => {};
+  const onSignUpPress = async () => {};
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.header}>Galaxies.dev</Text>
+      <TextInput
+        style={styles.inputField}
+        placeholder="Email"
+        placeholderTextColor="#fff"
+        onChangeText={setEmail}
+        value={email}
+        autoCapitalize="none"
+      />
+      <TextInput
+        style={styles.inputField}
+        placeholder="Password"
+        placeholderTextColor="#fff"
+        onChangeText={setPassword}
+        value={password}
+        secureTextEntry={true}
+      />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 200,
+    padding: 20,
+    backgroundColor: "#151515",
+  },
+  header: {
+    fontSize: 30,
+    color: "#fff",
+    textAlign: "center",
+    margin: 50,
+  },
+  inputField: {
+    marginVertical: 4,
+    height: 50,
+    borderWidth: 1,
+    borderColor: "#2b825b",
+    borderRadius: 4,
+    padding: 10,
+    color: "#fff",
+    backgroundColor: "#363636",
+  },
+});
+
+export default Page;
