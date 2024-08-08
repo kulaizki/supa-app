@@ -1,21 +1,53 @@
 import {
+  Alert,
   View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
   Button,
+  TextInput,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
   ActivityIndicator,
-} from "react-native";
-import { useState } from "react";
+} from 'react-native';
+import { useState } from 'react';
+import React from 'react';
+import { supabase } from '@/utils/supabase';
+// import { AppleAuth } from '@/components/AppleAuth.native';
+// import { GoogleAuth } from '@/components/GoogleAuth.native';
 
 const Page = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const onSignInPress = async () => {};
-  const onSignUpPress = async () => {};
+  const onSignInPress = async () => {
+    setLoading(true);
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) Alert.alert(error.message);
+    setLoading(false);
+  };
+
+  // Create a new user
+  const onSignUpPress = async () => {
+    setLoading(true);
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+    });
+
+    if (error) Alert.alert(error.message);
+    if (!session)
+      Alert.alert("Please check your inbox for email verification!");
+
+    setLoading(false);
+  };
 
   return (
     <View style={styles.container}>
@@ -88,7 +120,7 @@ const styles = StyleSheet.create({
     elevation: 1,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     gap: 10,
-  }
+  },
 });
 
 export default Page;
