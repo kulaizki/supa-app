@@ -1,44 +1,21 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import { supabase } from "@/utils/supabase";
+import { Session } from "@supabase/supabase-js";
+import { useRouter, useSegments } from "expo-router";
+import { useEffect, useState } from "react";
 
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from 'expo-router';
+// Makes sure the user is authenticated before accessing protected pages
+const InitialLayout = () => {
+  const [session, setSession] = useState<Session | null>(null);
+  const [initialized, setInitialized] = useState<boolean>(false);
 
-export default function RootLayout() {
-  const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-    ...FontAwesome.font,
-  });
-
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
-  useEffect(() => {
-    if (error) throw error;
-  }, [error]);
+  const segments = useSegments();
+  const router = useRouter();
 
   useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
+    const { data } = supabase.auth.onAuthStateChange(async (event, session) => {
+      console.log("supabase.auth.onAuthStateChange", event, session);
+    });
+  }, []);
+};
 
-  if (!loaded) {
-    return null;
-  }
-
-  return <RootLayoutNav />;
-}
-
-function RootLayoutNav() {
-
-  return (
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-      </Stack>
-  );
-}
+export default InitialLayout;
