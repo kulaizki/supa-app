@@ -9,10 +9,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { useState } from 'react';
-import React from 'react';
 import { supabase } from '@/utils/supabase';
-// import { AppleAuth } from '@/components/AppleAuth.native';
-// import { GoogleAuth } from '@/components/GoogleAuth.native';
 
 const Page = () => {
   const [email, setEmail] = useState("");
