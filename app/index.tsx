@@ -4,6 +4,7 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Button,
 } from "react-native";
 import { useState } from "react";
 
@@ -37,9 +38,7 @@ const Page = () => {
       <TouchableOpacity style={styles.button} onPress={onSignInPress}>
         <Text style={{ color: "#fff" }}>Sign In</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={onSignUpPress}>
-        <Text style={{ color: "#fff" }}>Sign Up</Text>
-      </TouchableOpacity>
+      <Button title="Sign Up" onPress={onSignUpPress} />
     </View>
   );
 };
