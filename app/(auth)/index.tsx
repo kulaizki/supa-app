@@ -2,8 +2,8 @@ import { View, Button, TextInput, FlatList, Text, ListRenderItem, StyleSheet } f
 import { supabase } from '@/utils/supabase';
 import { useEffect, useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import AppleStyleSwipeableRow from '@/components/SwipeableRow';
 import { Todo } from '@/utils/interfaces';
+import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 
 const Page = () => {
   const [todo, setTodo] = useState('');
