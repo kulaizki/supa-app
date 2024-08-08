@@ -1,4 +1,10 @@
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import { useState } from "react";
 
 const Page = () => {
@@ -28,6 +34,12 @@ const Page = () => {
         value={password}
         secureTextEntry={true}
       />
+      <TouchableOpacity style={styles.button} onPress={onSignInPress}>
+        <Text style={{ color: "#fff" }}>Sign In</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={onSignUpPress}>
+        <Text style={{ color: "#fff" }}>Sign Up</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -54,6 +66,13 @@ const styles = StyleSheet.create({
     padding: 10,
     color: "#fff",
     backgroundColor: "#363636",
+  },
+  button: {
+    marginVertical: 15,
+    alignItems: "center",
+    backgroundColor: "#2b825b",
+    padding: 12,
+    borderRadius: 4,
   },
 });
 
